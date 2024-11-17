@@ -1,0 +1,59 @@
+﻿@model Proyecto2.Models.Editoriale
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1 class="text-center mb-4">Eliminar Editorial</h1>
+
+<div class="container">
+    <h4 class="text-center">¿Está seguro de que quiere eliminar esta editorial?</h4>
+    <hr />
+
+    <!-- Tarjeta para mostrar la información de la editorial -->
+    <div class="card p-3 shadow-sm mb-4 mx-auto" style="max-width: 500px;">
+        <dl class="row">
+            <dt class="col-sm-4">
+                <strong>@Html.DisplayNameFor(model => model.Nombres)</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Nombres)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>@Html.DisplayNameFor(model => model.Telefono)</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Telefono)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>@Html.DisplayNameFor(model => model.Direccion)</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Direccion)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>@Html.DisplayNameFor(model => model.Email)</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>@Html.DisplayNameFor(model => model.Sitioweb)</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Sitioweb)
+            </dd>
+        </dl>
+    </div>
+
+    <!-- Formulario de eliminación con botones de acción -->
+    <form asp-action="Delete" class="form-group d-flex justify-content-center mt-4" style="max-width: 500px; margin: 0 auto;">
+        <input type="hidden" asp-for="Nit" />
+        <input type="submit" value="Eliminar" class="btn btn-danger btn-md" style="width: 48%; margin-right: 4%;" />
+        <a class="btn btn-dark btn-md" asp-action="Index" style="width: 48%;">Volver a la lista</a>
+    </form>
+</div>

@@ -1,0 +1,73 @@
+﻿@model Proyecto2.Models.Libro
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1 class="text-center mb-4">Eliminar Libro</h1>
+
+<div class="container">
+    <h4 class="text-center">¿Está seguro de que quiere eliminar este libro?</h4>
+    <hr />
+
+    <!-- Tarjeta para mostrar la información del libro -->
+    <div class="card p-3 shadow-sm mb-4 mx-auto" style="max-width: 500px;">
+        <dl class="row">
+            <dt class="col-sm-4">
+                <strong>Título</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Titulo)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>Descripción</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>Nombre Autor</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.NombreAutor)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>Publicación</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Publicacion)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>Fecha Registro</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.FechaRegistro)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>Código Categoria</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.CodigoCategoriaNavigation.CodigoCategoria)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>Nit Editorial</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.NitEditorialNavigation.Nit)
+            </dd>
+        </dl>
+    </div>
+
+    <!-- Formulario de eliminación con botones de acción -->
+    <form asp-action="Delete" class="form-group d-flex justify-content-center mt-4" style="max-width: 500px; margin: 0 auto;">
+        <input type="hidden" asp-for="Isbn" />
+        <input type="submit" value="Eliminar" class="btn btn-danger btn-md" style="width: 48%; margin-right: 4%;" />
+        <a class="btn btn-dark btn-md" asp-action="Index" style="width: 48%;">Volver a la lista</a>
+    </form>
+</div>

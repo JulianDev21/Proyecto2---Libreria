@@ -1,0 +1,43 @@
+﻿@model Proyecto2.Models.LibrosAutor
+
+@{
+    ViewData["Title"] = "Crear LibrosAutor";
+}
+
+<h1 class="text-center mb-4">Crear Nuevo Registro de Autor y Libro</h1>
+
+<h4 class="text-center">LibrosAutor</h4>
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <!-- Resumen de validación -->
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <!-- Campo IdAutor -->
+            <div class="form-group mb-3">
+                <label asp-for="IdAutor" class="form-label">Autor</label>
+                <select asp-for="IdAutor" class="form-control" asp-items="ViewBag.IdAutor"></select>
+            </div>
+
+            <!-- Campo Isbn -->
+            <div class="form-group mb-3">
+                <label asp-for="Isbn" class="form-label">ISBN</label>
+                <select asp-for="Isbn" class="form-control" asp-items="ViewBag.Isbn"></select>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="form-group d-flex justify-content-between mt-4">
+                <input type="submit" value="Crear" class="btn btn-success btn-md" style="width: 48%;" />
+                <a class="btn btn-secondary btn-md" style="width: 48%;" asp-action="Index">Volver a la lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

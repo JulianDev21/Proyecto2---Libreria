@@ -1,0 +1,40 @@
+﻿@model Proyecto2.Models.Categoria
+
+@{
+    ViewData["Title"] = "Editar Categoría";
+}
+
+<h1 class="text-center mb-4">Editar Categoría</h1>
+
+<h4 class="text-center">Detalles de la Categoría</h4>
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <!-- Resumen de validación -->
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <input type="hidden" asp-for="CodigoCategoria" />
+
+            <!-- Campo Nombre -->
+            <div class="form-group mb-3">
+                <label asp-for="Nombre" class="form-label">Nombre</label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="form-group d-flex justify-content-between mt-4">
+                <input type="submit" value="Guardar" class="btn btn-success btn-md" style="width: 48%;" />
+                <a class="btn btn-secondary btn-md" style="width: 48%;" asp-action="Index">Volver a la lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

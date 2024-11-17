@@ -1,0 +1,72 @@
+﻿@model Proyecto2.Models.Libro
+
+@{
+    ViewData["Title"] = "Detalles del Libro";
+}
+
+<h1 class="text-center mb-4">Detalles del Libro</h1>
+
+<div class="container">
+    <h4 class="text-center">Información del Libro</h4>
+    <hr />
+
+    <!-- Tarjeta para mostrar la información del libro -->
+    <div class="card p-3 shadow-sm mb-4 mx-auto" style="max-width: 500px;">
+        <dl class="row">
+            <dt class="col-sm-4">
+                <strong>Titulo</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Titulo)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>@Html.DisplayNameFor(model => model.Descripcion)</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>Nombre Autor</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.NombreAutor)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>Publicación</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Publicacion)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>Fecha Registro</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.FechaRegistro)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>Código Categoria</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.CodigoCategoriaNavigation.CodigoCategoria)
+            </dd>
+
+            <dt class="col-sm-4">
+                <strong>Nit Editorial</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.NitEditorialNavigation.Nit)
+            </dd>
+        </dl>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="form-group d-flex justify-content-center mt-4" style="max-width: 500px; margin: 0 auto;">
+        <a class="btn btn-primary btn-md" asp-action="Edit" asp-route-id="@Model?.Isbn" style="width: 48%; margin-right: 4%;">Editar</a>
+        <a class="btn btn-secondary btn-md" style="width: 48%;" asp-action="Index">Volver a la lista</a>
+    </div>
+</div>

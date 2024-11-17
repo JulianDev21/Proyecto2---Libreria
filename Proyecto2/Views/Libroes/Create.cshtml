@@ -1,0 +1,97 @@
+﻿@model Proyecto2.Models.Libro
+
+@{
+    ViewData["Title"] = "Crear Libro";
+}
+
+<h1 class="text-center mb-4">Crear Nuevo Libro</h1>
+
+<h4 class="text-center">Libro</h4>
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <!-- Validación del formulario -->
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <!-- Campo ISBN -->
+            <div class="form-group mb-3">
+                <label asp-for="Isbn" class="form-label">ISBN</label>
+                <input asp-for="Isbn" class="form-control" placeholder="Ingrese el ISBN" />
+                <span asp-validation-for="Isbn" class="text-danger"></span>
+            </div>
+
+            <!-- Campo Título -->
+            <div class="form-group mb-3">
+                <label asp-for="Titulo" class="form-label">Título</label>
+                <input asp-for="Titulo" class="form-control" placeholder="Ingrese el título del libro" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+
+            <!-- Campo Descripción -->
+            <div class="form-group mb-3">
+                <label asp-for="Descripcion" class="form-label">Descripción</label>
+                <input asp-for="Descripcion" class="form-control" placeholder="Ingrese la descripción del libro" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+
+            <!-- Campo Nombre del Autor -->
+            <div class="form-group mb-3">
+                <label asp-for="NombreAutor" class="form-label">Autor</label>
+                <input asp-for="NombreAutor" class="form-control" placeholder="Ingrese el nombre del autor" />
+                <span asp-validation-for="NombreAutor" class="text-danger"></span>
+            </div>
+
+            <!-- Campo Publicación -->
+            <div class="form-group mb-3">
+                <label asp-for="Publicacion" class="form-label">Fecha de Publicación</label>
+                <input asp-for="Publicacion" class="form-control" type="date" />
+                <span asp-validation-for="Publicacion" class="text-danger"></span>
+            </div>
+
+            <!-- Campo Fecha de Registro -->
+            <div class="form-group mb-3">
+                <label asp-for="FechaRegistro" class="form-label">Fecha de Registro</label>
+                <input asp-for="FechaRegistro" class="form-control" type="date" />
+                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+            </div>
+
+            <!-- Campo Categoría -->
+            <div class="form-group mb-3">
+                <label asp-for="CodigoCategoria" class="form-label">Categoría</label>
+                <select asp-for="CodigoCategoria" class="form-control" asp-items="ViewBag.CodigoCategoria"></select>
+            </div>
+
+            <!-- Campo Editorial -->
+            <div class="form-group mb-3">
+                <label asp-for="NitEditorial" class="form-label">Editorial</label>
+                <select asp-for="NitEditorial" class="form-control" asp-items="ViewBag.NitEditorial"></select>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="form-group d-flex justify-content-between mt-4">
+                <input type="submit" value="Crear" class="btn btn-success btn-md" style="width: 48%;" />
+                <a class="btn btn-secondary btn-md" style="width: 48%;" asp-action="Index">Volver a la lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    @if (ViewData["IsbnError"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '@ViewData["IsbnError"]',
+                confirmButtonText: 'Aceptar'
+            });
+        </script>
+    }
+}

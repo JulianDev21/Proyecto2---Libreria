@@ -1,0 +1,31 @@
+﻿@model Proyecto2.Models.Categoria
+
+@{
+    ViewData["Title"] = "Detalles de la Categoría";
+}
+
+<h1 class="text-center mb-4">Detalles de la Categoría</h1>
+
+<div class="container">
+    <h4 class="text-center">Información de la Categoría</h4>
+    <hr />
+
+    <!-- Tarjeta para mostrar la información de la categoría -->
+    <div class="card p-3 shadow-sm mb-4 mx-auto" style="max-width: 500px;">
+        <dl class="row">
+            <dt class="col-sm-4">
+                <strong>@Html.DisplayNameFor(model => model.Nombre)</strong>
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+        </dl>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="form-group d-flex justify-content-center mt-4" style="max-width: 500px; margin: 0 auto;">
+        <a class="btn btn-success btn-md" asp-action="Edit" asp-route-id="@Model?.CodigoCategoria" style="width: 48%; margin-right: 4%;">Editar</a>
+        <a class="btn btn-secondary btn-md" style="width: 48%;" asp-action="Index">Volver a la lista</a>
+    </div>
+
+</div>

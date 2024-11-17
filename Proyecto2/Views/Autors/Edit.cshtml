@@ -1,0 +1,55 @@
+﻿@model Proyecto2.Models.Autor
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="text-center mb-4">Editar Autor</h1>
+
+<h4 class="text-center">Detalles del Autor</h4>
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <!-- Resumen de validación -->
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <input type="hidden" asp-for="IdAutor" />
+
+
+            <!-- Campo Nombre -->
+            <div class="form-group mb-3">
+                <label asp-for="Nombre" class="form-label">Nombre</label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <!-- Campo Apellido -->
+            <div class="form-group mb-3">
+                <label asp-for="Apellido" class="form-label">Apellido</label>
+                <input asp-for="Apellido" class="form-control" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+
+            <!-- Campo Nacionalidad -->
+            <div class="form-group mb-3">
+                <label asp-for="Nacionalidad" class="form-label">Nacionalidad</label>
+                <input asp-for="Nacionalidad" class="form-control" />
+                <span asp-validation-for="Nacionalidad" class="text-danger"></span>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="form-group d-flex justify-content-between mt-4">
+                <input type="submit" value="Save" class="btn btn-success btn-md" style="width: 48%;" />
+                <a class="btn btn-secondary btn-md" style="width: 48%;" asp-action="Index">Volver a la lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

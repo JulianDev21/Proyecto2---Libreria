@@ -1,0 +1,69 @@
+﻿@model Proyecto2.Models.Editoriale
+
+@{
+    ViewData["Title"] = "Editar Editorial";
+}
+
+<h1 class="text-center mb-4">Editar Editorial</h1>
+
+<h4 class="text-center">Detalles de la Editorial</h4>
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <!-- Resumen de validación -->
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+
+            <input type="hidden" asp-for="Nit" />
+
+            <!-- Campo Nombres -->
+            <div class="form-group mb-3">
+                <label asp-for="Nombres" class="form-label">Nombre de la Editorial</label>
+                <input asp-for="Nombres" class="form-control" />
+                <span asp-validation-for="Nombres" class="text-danger"></span>
+            </div>
+
+            <!-- Campo Teléfono -->
+            <div class="form-group mb-3">
+                <label asp-for="Telefono" class="form-label">Teléfono</label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+
+            <!-- Campo Dirección -->
+            <div class="form-group mb-3">
+                <label asp-for="Direccion" class="form-label">Dirección</label>
+                <input asp-for="Direccion" class="form-control" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+
+            <!-- Campo Email -->
+            <div class="form-group mb-3">
+                <label asp-for="Email" class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <!-- Campo Sitio Web -->
+            <div class="form-group mb-3">
+                <label asp-for="Sitioweb" class="form-label">Sitio Web</label>
+                <input asp-for="Sitioweb" class="form-control" />
+                <span asp-validation-for="Sitioweb" class="text-danger"></span>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="form-group d-flex justify-content-between mt-4">
+                <input type="submit" value="Guardar" class="btn btn-success btn-md" style="width: 48%;" />
+                <a class="btn btn-secondary btn-md" style="width: 48%;" asp-action="Index">Volver a la lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

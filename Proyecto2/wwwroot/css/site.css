@@ -1,0 +1,54 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* Nuevos estilos para el menú desplegable manteniendo la consistencia */
+.navbar-nav .dropdown {
+    position: relative; /* Posición relativa para el menú desplegable */
+
+}
+
+.navbar-nav .dropdown-menu {
+    display: none; /* Ocultar menú desplegable por defecto */
+    position: absolute; /* Posición absoluta */
+    top: 100%; /* ubicar debajo del botón */
+    left: 0;
+    z-index: 1000; /* Asegurar que esté por encima de otros elementos */
+    min-width: 200px; /* Ancho mínimo */
+    padding: .5rem 0; /* Espaciado */
+    background-color: #fff; /* Color de fondo */
+    border: 1px solid #e5e5e5; /* Borde */
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); /* Sombra */
+
+
+}
+
+.navbar-nav .dropdown:hover .dropdown-menu {
+    display: block; /* Mostrar menú al pasar el mouse */
+}
+
+.nav-link.text-dark:hover {
+    color: #007bff !important;
+    opacity: 0.8;
+    transform: translateY(-1px);
+    transition: all 0.3s ease;
+}
