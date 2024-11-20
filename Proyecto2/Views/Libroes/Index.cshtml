@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="text-center my-4">Lista de Libros</h1>
+<h1 class="text-center my-4">Gestión de Libros</h1>
 
 <style>
     /* Estilo de los botones de exportación */
@@ -54,7 +54,7 @@
 
 <!-- Botón Crear Nuevo -->
 <p >
-    <a class="btn btn-create" asp-action="Create">Crear Nuevo</a>
+    <a class="btn btn-create" asp-action="Create">Nuevo Libro</a>
 </p>
 
 <div class="table-container">
@@ -80,8 +80,8 @@
                     <td>@Html.DisplayFor(modelItem => item.NombreAutor)</td>
                     <td>@Html.DisplayFor(modelItem => item.Publicacion)</td>
                     <td>@Html.DisplayFor(modelItem => item.FechaRegistro)</td>
-                    <td>@Html.DisplayFor(modelItem => item.CodigoCategoriaNavigation.CodigoCategoria)</td>
-                    <td>@Html.DisplayFor(modelItem => item.NitEditorialNavigation.Nit)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CodigoCategoriaNavigation.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NitEditorialNavigation.Nombres)</td>
                     <td>
                         <div class="d-flex justify-content-around">
                             <a class="btn btn-secondary table-action-btn" asp-action="Edit" asp-route-id="@item.Isbn" title="Editar">
@@ -145,7 +145,7 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'Ocurrió un error al intentar eliminar el autor.'
+                            text: 'El libro no se puede eliminar ya que esta relacionado con otros registros.'
                         });
                     }
                 });

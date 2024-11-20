@@ -51,18 +51,34 @@ namespace Proyecto2.Controllers
         // POST: Editoriales/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Editoriales/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Nit,Nombres,Telefono,Direccion,Email,Sitioweb")] Editoriale editoriale)
         {
             if (ModelState.IsValid)
             {
+                // Verificar si el correo electrónico ya existe en la base de datos
+                var existingEditoriale = await _context.Editoriales
+                    .FirstOrDefaultAsync(e => e.Email == editoriale.Email);
+
+                if (existingEditoriale != null)
+                {
+                    // Si el correo electrónico ya existe, agregar un error al ViewData para mostrar el mensaje en la vista
+                    ViewData["EmailError"] = "El correo electronico ingresado ya existe.";
+                    return View(editoriale);
+                }
+
+                // Si el correo electrónico no existe, proceder con la creación de la editorial
                 _context.Add(editoriale);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            // Si el modelo no es válido, devolver la vista con los errores
             return View(editoriale);
         }
+
 
         // GET: Editoriales/Edit/5
         public async Task<IActionResult> Edit(int? id)

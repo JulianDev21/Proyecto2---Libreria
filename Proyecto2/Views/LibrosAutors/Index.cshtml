@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="text-center my-4">Lista de Libros y Autores</h1>
+<h1 class="text-center my-4">Gestión de Libros y Autores</h1>
 
 <style>
     /* Estilo de los botones de exportación */
@@ -54,7 +54,7 @@
 
 <!-- Botón Crear Nuevo -->
 <p>
-    <a class="btn btn-create" asp-action="Create">Crear Nuevo</a>
+    <a class="btn btn-create" asp-action="Create">Nuevo Libro - Autor</a>
 </p>
 
 <div class="table-container">
@@ -70,8 +70,8 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.IdAutorNavigation.IdAutor)</td>
-                    <td>@Html.DisplayFor(modelItem => item.IsbnNavigation.Isbn)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdAutorNavigation.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IsbnNavigation.Titulo)</td>
                     <td>
                         <div class="d-flex justify-content-around">
                             <a class="btn btn-secondary table-action-btn" asp-action="Edit" asp-route-id="@item.IdLibroAutor" title="Editar">

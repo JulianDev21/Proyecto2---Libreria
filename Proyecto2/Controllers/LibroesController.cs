@@ -48,8 +48,20 @@ namespace Proyecto2.Controllers
         // GET: Libroes/Create
         public IActionResult Create()
         {
-            ViewData["CodigoCategoria"] = new SelectList(_context.Categorias, "CodigoCategoria", "CodigoCategoria");
-            ViewData["NitEditorial"] = new SelectList(_context.Editoriales, "Nit", "Nit");
+            // Concatenar "CodigoCategoria - NombreCategoria" para mostrar en el desplegable de categorías
+            ViewData["CodigoCategoria"] = new SelectList(_context.Categorias.Select(c => new
+            {
+                CodigoCategoria = c.CodigoCategoria,
+                NombreCategoria = c.CodigoCategoria + " - " + c.Nombre // Muestra el código y nombre juntos
+            }), "CodigoCategoria", "NombreCategoria");
+
+            // Concatenar "Nit - NombreEditorial" para mostrar en el desplegable de editoriales
+            ViewData["NitEditorial"] = new SelectList(_context.Editoriales.Select(e => new
+            {
+                Nit = e.Nit,
+                NombreEditorial = e.Nit + " - " + e.Nombres // Muestra el nit y nombre juntos
+            }), "Nit", "NombreEditorial");
+
             return View();
         }
 
@@ -68,8 +80,20 @@ namespace Proyecto2.Controllers
                 {
                     // Si el ISBN ya existe, agregar un error al ViewData para mostrar el mensaje en la vista
                     ViewData["IsbnError"] = "El ISBN ingresado ya existe.";
-                    ViewData["CodigoCategoria"] = new SelectList(_context.Categorias, "CodigoCategoria", "CodigoCategoria", libro.CodigoCategoria);
-                    ViewData["NitEditorial"] = new SelectList(_context.Editoriales, "Nit", "Nit", libro.NitEditorial);
+
+                    // Volver a cargar los datos de categorías y editoriales con concatenación
+                    ViewData["CodigoCategoria"] = new SelectList(_context.Categorias.Select(c => new
+                    {
+                        CodigoCategoria = c.CodigoCategoria,
+                        NombreCategoria = c.CodigoCategoria + " - " + c.Nombre
+                    }), "CodigoCategoria", "NombreCategoria", libro.CodigoCategoria);
+
+                    ViewData["NitEditorial"] = new SelectList(_context.Editoriales.Select(e => new
+                    {
+                        Nit = e.Nit,
+                        NombreEditorial = e.Nit + " - " + e.Nombres
+                    }), "Nit", "NombreEditorial", libro.NitEditorial);
+
                     return View(libro);
                 }
 
@@ -79,9 +103,19 @@ namespace Proyecto2.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // Si el modelo no es válido, devolver la vista con los errores
-            ViewData["CodigoCategoria"] = new SelectList(_context.Categorias, "CodigoCategoria", "CodigoCategoria", libro.CodigoCategoria);
-            ViewData["NitEditorial"] = new SelectList(_context.Editoriales, "Nit", "Nit", libro.NitEditorial);
+            // Si el modelo no es válido, volver a cargar los datos de categorías y editoriales
+            ViewData["CodigoCategoria"] = new SelectList(_context.Categorias.Select(c => new
+            {
+                CodigoCategoria = c.CodigoCategoria,
+                NombreCategoria = c.CodigoCategoria + " - " + c.Nombre
+            }), "CodigoCategoria", "NombreCategoria", libro.CodigoCategoria);
+
+            ViewData["NitEditorial"] = new SelectList(_context.Editoriales.Select(e => new
+            {
+                Nit = e.Nit,
+                NombreEditorial = e.Nit + " - " + e.Nombres
+            }), "Nit", "NombreEditorial", libro.NitEditorial);
+
             return View(libro);
         }
 
@@ -99,8 +133,31 @@ namespace Proyecto2.Controllers
             {
                 return NotFound();
             }
-            ViewData["CodigoCategoria"] = new SelectList(_context.Categorias, "CodigoCategoria", "CodigoCategoria", libro.CodigoCategoria);
-            ViewData["NitEditorial"] = new SelectList(_context.Editoriales, "Nit", "Nit", libro.NitEditorial);
+
+            // Generar el SelectList para categorías concatenando CódigoCategoria y Nombre
+            ViewData["CodigoCategoria"] = new SelectList(
+                _context.Categorias.Select(c => new
+                {
+                    CodigoCategoria = c.CodigoCategoria,
+                    NombreCategoria = c.CodigoCategoria + " - " + c.Nombre
+                }),
+                "CodigoCategoria",
+                "NombreCategoria",
+                libro.CodigoCategoria
+            );
+
+            // Generar el SelectList para editoriales concatenando Nit y Nombre
+            ViewData["NitEditorial"] = new SelectList(
+                _context.Editoriales.Select(e => new
+                {
+                    Nit = e.Nit,
+                    NombreEditorial = e.Nit + " - " + e.Nombres
+                }),
+                "Nit",
+                "NombreEditorial",
+                libro.NitEditorial
+            );
+
             return View(libro);
         }
 
@@ -136,10 +193,33 @@ namespace Proyecto2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CodigoCategoria"] = new SelectList(_context.Categorias, "CodigoCategoria", "CodigoCategoria", libro.CodigoCategoria);
-            ViewData["NitEditorial"] = new SelectList(_context.Editoriales, "Nit", "Nit", libro.NitEditorial);
+
+            // En caso de que el modelo no sea válido, volver a cargar los SelectList con la concatenación
+            ViewData["CodigoCategoria"] = new SelectList(
+                _context.Categorias.Select(c => new
+                {
+                    CodigoCategoria = c.CodigoCategoria,
+                    NombreCategoria = c.CodigoCategoria + " - " + c.Nombre
+                }),
+                "CodigoCategoria",
+                "NombreCategoria",
+                libro.CodigoCategoria
+            );
+
+            ViewData["NitEditorial"] = new SelectList(
+                _context.Editoriales.Select(e => new
+                {
+                    Nit = e.Nit,
+                    NombreEditorial = e.Nit + " - " + e.Nombres
+                }),
+                "Nit",
+                "NombreEditorial",
+                libro.NitEditorial
+            );
+
             return View(libro);
         }
+
 
         // GET: Libroes/Delete/5
         public async Task<IActionResult> Delete(string id)

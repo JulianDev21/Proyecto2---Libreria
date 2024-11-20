@@ -48,14 +48,24 @@ namespace Proyecto2.Controllers
         // GET: LibrosAutors/Create
         public IActionResult Create()
         {
-            ViewData["IdAutor"] = new SelectList(_context.Autors, "IdAutor", "IdAutor");
-            ViewData["Isbn"] = new SelectList(_context.Libros, "Isbn", "Isbn");
+            // Cargar lista de autores con identificador y nombre completo
+            ViewData["IdAutor"] = new SelectList(_context.Autors.Select(a => new
+            {
+                IdAutor = a.IdAutor,
+                NombreCompleto = a.IdAutor + " - " + a.Nombre + " " + a.Apellido // IdAutor concatenado con nombre completo
+            }), "IdAutor", "NombreCompleto");
+
+            // Cargar lista de libros con ISBN y título
+            ViewData["Isbn"] = new SelectList(_context.Libros.Select(l => new
+            {
+                Isbn = l.Isbn,
+                Titulo = l.Isbn + " - " + l.Titulo // ISBN concatenado con título del libro
+            }), "Isbn", "Titulo");
+
             return View();
         }
 
         // POST: LibrosAutors/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdLibroAutor,IdAutor,Isbn")] LibrosAutor librosAutor)
@@ -66,10 +76,24 @@ namespace Proyecto2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdAutor"] = new SelectList(_context.Autors, "IdAutor", "IdAutor", librosAutor.IdAutor);
-            ViewData["Isbn"] = new SelectList(_context.Libros, "Isbn", "Isbn", librosAutor.Isbn);
+
+            // Si el modelo no es válido, volver a cargar las listas de autores y libros
+            ViewData["IdAutor"] = new SelectList(_context.Autors.Select(a => new
+            {
+                IdAutor = a.IdAutor,
+                NombreCompleto = a.IdAutor + " - " + a.Nombre + " " + a.Apellido
+            }), "IdAutor", "NombreCompleto", librosAutor.IdAutor);
+
+            ViewData["Isbn"] = new SelectList(_context.Libros.Select(l => new
+            {
+                Isbn = l.Isbn,
+                Titulo = l.Isbn + " - " + l.Titulo
+            }), "Isbn", "Titulo", librosAutor.Isbn);
+
             return View(librosAutor);
         }
+
+
 
         // GET: LibrosAutors/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -84,14 +108,25 @@ namespace Proyecto2.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdAutor"] = new SelectList(_context.Autors, "IdAutor", "IdAutor", librosAutor.IdAutor);
-            ViewData["Isbn"] = new SelectList(_context.Libros, "Isbn", "Isbn", librosAutor.Isbn);
+
+            // Cargar lista de autores con identificador y nombre completo
+            ViewData["IdAutor"] = new SelectList(_context.Autors.Select(a => new
+            {
+                IdAutor = a.IdAutor,
+                NombreCompleto = a.IdAutor + " - " + a.Nombre + " " + a.Apellido
+            }), "IdAutor", "NombreCompleto", librosAutor.IdAutor);
+
+            // Cargar lista de libros con ISBN y título
+            ViewData["Isbn"] = new SelectList(_context.Libros.Select(l => new
+            {
+                Isbn = l.Isbn,
+                Titulo = l.Isbn + " - " + l.Titulo
+            }), "Isbn", "Titulo", librosAutor.Isbn);
+
             return View(librosAutor);
         }
 
         // POST: LibrosAutors/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdLibroAutor,IdAutor,Isbn")] LibrosAutor librosAutor)
@@ -121,52 +156,24 @@ namespace Proyecto2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdAutor"] = new SelectList(_context.Autors, "IdAutor", "IdAutor", librosAutor.IdAutor);
-            ViewData["Isbn"] = new SelectList(_context.Libros, "Isbn", "Isbn", librosAutor.Isbn);
+
+            // Si el modelo no es válido, volver a cargar las listas de autores y libros
+            ViewData["IdAutor"] = new SelectList(_context.Autors.Select(a => new
+            {
+                IdAutor = a.IdAutor,
+                NombreCompleto = a.IdAutor + " - " + a.Nombre + " " + a.Apellido
+            }), "IdAutor", "NombreCompleto", librosAutor.IdAutor);
+
+            ViewData["Isbn"] = new SelectList(_context.Libros.Select(l => new
+            {
+                Isbn = l.Isbn,
+                Titulo = l.Isbn + " - " + l.Titulo
+            }), "Isbn", "Titulo", librosAutor.Isbn);
+
             return View(librosAutor);
         }
 
 
-        //// GET: LibrosAutors/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var librosAutor = await _context.LibrosAutors
-        //        .Include(l => l.IdAutorNavigation)  // Incluye autor relacionado
-        //        .Include(l => l.IsbnNavigation)    // Incluye ISBN relacionado
-        //        .FirstOrDefaultAsync(m => m.IdLibroAutor == id);
-
-        //    if (librosAutor == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(librosAutor);
-        //}
-
-
-
-        //// POST: LibrosAutors/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var librosAutor = await _context.LibrosAutors.FindAsync(id);
-        //    if (librosAutor == null)
-        //    {
-        //        return Json(new { success = false, errorMessage = "El registro no fue encontrado." });
-        //    }
-
-        //    // Eliminar el registro directamente
-        //    _context.LibrosAutors.Remove(librosAutor);
-        //    await _context.SaveChangesAsync();
-
-        //    return Json(new { success = true, message = "Registro eliminado correctamente." });
-        //}
 
 
         // GET: LibrosAutors/Delete/5
